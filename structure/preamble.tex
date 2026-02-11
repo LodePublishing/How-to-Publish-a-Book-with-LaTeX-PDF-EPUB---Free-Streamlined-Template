@@ -1,0 +1,31 @@
+% Structure of the preamble
+% See README.md for documentation
+
+% Load settings files and set variables
+\input{settings/details.tex}
+\input{settings/content.tex}
+\input{settings/publisher.tex}
+
+% Load additional LaTeX libraries
+\input{lib/packages}
+
+% Load style
+\ifebook
+    \input{style/e-book-style}
+    \input{style/e-book-advanced}
+\else
+    \input{style/pdf-style}
+    \input{style/pdf-advanced}
+\fi
+
+% General settings applying both to e-books and print
+\input{style/general}
+  
+\ifebook
+\else
+% Microtype's \CheckCommand verifies \showhyphens hasn't changed, but
+% the LaTeX kernel redefined it. Disabling the check is safe: it only
+% verifies definitions and is preamble-only (\@onlypreamble).
+    \makeatletter\let\@check@eq\@gobbletwo\makeatother
+    \usepackage{microtype}
+\fi

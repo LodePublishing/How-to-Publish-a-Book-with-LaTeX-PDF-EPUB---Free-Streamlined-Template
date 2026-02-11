@@ -1,0 +1,28 @@
+% Cross-referencing and hyperlink configuration
+% See README.md for documentation
+
+\ifebook
+    \usepackage{endnotes}
+    \let\footnote=\endnote   % Replaces footnote with endnote in e-books. Don't forget to call \theendnotes!
+
+    % Reset the endnotes counter with each new chapter    
+    \makeatletter
+    \@addtoreset{endnote}{chapter}
+    \makeatother
+\fi
+
+% Write the name of a referenced section or chapter label with \nameref{label}
+\usepackage{nameref}
+
+% Redefining the \nameref command to use italics formatting needs to be done in the preamble:
+\let\oldnameref\nameref
+\renewcommand{\nameref}[1]{\textit{\oldnameref{#1}}}
+
+% Activate support for url formatting.
+% For specific long URLs or code:
+\usepackage[hyphens]{xurl}
+
+\usepackage[hidelinks]{hyperref}
+
+% Add support for hyperlinks in footnotes
+\usepackage{footnotehyper}

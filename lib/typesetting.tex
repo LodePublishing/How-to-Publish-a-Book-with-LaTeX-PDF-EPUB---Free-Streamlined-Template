@@ -1,0 +1,43 @@
+% Typesetting configuration
+
+% For advanced mathematical typesetting (aligning equations)
+\usepackage{amsmath}
+
+% For column formatting
+\usepackage{array}
+
+% Loading this package adds support for numbered lists
+\usepackage{enumitem}
+
+% You can use these custom boxes to add variety to the flow of your book
+\usepackage{tcolorbox}
+
+% For a nicer author page
+\usepackage{wrapfig}
+
+% Code listings use verbatim (upgrade to minted with the full LODE template)
+\newenvironment{minted}[1]{\verbatim}{\endverbatim}
+
+
+% For professional-looking tables
+\usepackage{booktabs}
+
+% To change environments globally
+\usepackage{etoolbox}
+
+% This package provides the ding command for special symbols
+\usepackage{pifont}
+
+\ifebook
+    % e-book does not use background pictures
+\else
+    % Enable background images for pages
+    \usepackage{wallpaper}
+
+\fi
+
+\usepackage[normalem]{ulem}
+
+
+% Gives warnings for widow and orphan lines
+\usepackage[default-all]{widows-and-orphans}

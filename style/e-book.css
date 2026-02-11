@@ -1,0 +1,19 @@
+/* Hacks for improved design in older Kindle devices */
+
+figure.figure img { 
+    width: 100% !important; 
+    height: auto !important; 
+    max-width: 100%; 
+}
+
+figcaption.caption {
+    text-indent: 0em;
+    margin-left: 0em;
+    margin-right: 0em;
+    text-align: center;
+    line-height: 0.875;
+}
+
+h2 {
+    text-align: left;
+}

@@ -1,0 +1,24 @@
+% Title page
+% See README.md for documentation
+\clearpage
+\thispagestyle{empty}
+\begin{titlepage}
+\vspace*{\fill}
+\begin{center}
+    \bfseries \sffamily \Huge \myTitle\par
+    \bfseries \LARGE \mySubtitle{}\par
+    ~\\
+    By \myAuthor\\
+    ~\\
+    \bfseries \small Published by \myImprint, \myPublisherLocation\par
+    
+\ifebook
+\else
+    \ifuseCoverImage
+        \includegraphics[width=0.45\textwidth]{\coverImage}
+    \fi
+\fi
+\end{center}
+\vspace*{\fill}
+
+\end{titlepage}

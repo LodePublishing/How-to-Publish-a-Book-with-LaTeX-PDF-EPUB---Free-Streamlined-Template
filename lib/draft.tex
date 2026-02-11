@@ -1,0 +1,15 @@
+% Prioritize speed or quality (load before loading packages)
+% See README.md for documentation
+
+% We need graphicx for detecting draft mode
+\usepackage{graphicx}
+
+\newif\ifmydraft
+\makeatletter
+\ifGin@draft \mydrafttrue\else\fi
+\makeatother
+
+% Draft mode to speed up compilation
+\ifmydraft
+    \PassOptionsToPackage{draft,protrusion=false,expansion=false,tracking=false}{microtype}
+\fi

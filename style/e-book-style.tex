@@ -1,0 +1,27 @@
+% Style settings for e-books
+
+% Fix hyperref v7.01o compatibility with tex4ht:
+% tex4ht's hyperref.4ht references \Hy@chapapp before hyperref defines it
+\makeatletter
+\providecommand{\Hy@chapapp}{chapter}
+\makeatother
+
+% Fix biblatex/tex4ht xref compatibility:
+% \citetitle expands to include \EnsureStandardFontEncoding in the .xref file,
+% which breaks \csname parsing when tex4ht reads it back on subsequent passes.
+% Redefine after biblatex loads to make it a pure no-op.
+\AtBeginDocument{\def\EnsureStandardFontEncoding#1{}}
+
+\newenvironment{multicols}[1]
+  {\ignorespaces}% Begin code: ignore the column specification
+  {\ignorespacesafterend}%
+\renewcommand*{\index}[2][]{}
+
+\usepackage{xstring}
+
+\newcommand{\definition}[2]{#2}
+
+% Glossary entry command (simplified for e-book)
+\newcommand{\glsentry}[2]{\textbf{#1}: #2}
+
+\graphicspath{{images/}}

@@ -1,0 +1,17 @@
+% Typography configuration
+% See README.md for documentation
+
+\usepackage{ifluatex}
+
+\ifluatex
+    \usepackage{fontspec}
+    \defaultfontfeatures[Mono]{Ligatures=NoCommon}
+    % better footnotes (and superscript)
+    \usepackage{realscripts}
+    \usepackage{unicode-math}
+\else
+    % pdfLaTeX - use fontenc and traditional font packages
+    \usepackage[\typeencodings]{fontenc}
+    % workaround at least for some symbols
+    \usepackage{amssymb}
+\fi

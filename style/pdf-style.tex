@@ -1,0 +1,141 @@
+% Central LaTeX style settings for the PDF output (structure, fonts, colors, headings, layout, lists)
+
+%-------------------------------------------
+% BIBLIOGRAPHY
+%-------------------------------------------
+
+% The bibliography font is handled differently:
+% Set bibliography to footnote size that is sufficient as the bibliography is not read from top to bottom, but serves just as a reference in rare cases; comment out if you do not have a lot of references and can spare some space
+\renewcommand{\bibfont}{\footnotesize}
+
+
+% You can use ``same'' (same font as your document's), ``sf'', ``tt''  or ``rm''.
+% Also see https://www.ctan.org/pkg/url
+\urlstyle{tt}
+
+
+%-------------------------------------------
+% PDF SETUP
+%-------------------------------------------
+
+% Set up page geometry
+\usepackage[
+    paperwidth=\dimexpr\bookwidth+\bleed\relax,
+    paperheight=\dimexpr\bookheight+\bleed+\bleed\relax,
+    inner=\margininside,
+    outer=\dimexpr\marginoutside+\bleed\relax,
+    top=\dimexpr\margintop+\bleed\relax,
+    bottom=\dimexpr\marginbottom+\bleed\relax,
+    includehead,
+    includefoot,
+    headheight=24pt
+]{geometry}
+%-------------------------------------------
+% TYPOGRAPHY
+%-------------------------------------------
+
+% For custom fonts for certain parts of the book, use addtokomafont:
+
+\addtokomafont{subsection}{\large\sffamily\bfseries} % For subsection headings.
+\addtokomafont{section}{\LARGE\sffamily\bfseries} % For section headings.
+
+\addtokomafont{chapter}{\Huge\sffamily\bfseries}
+\addtokomafont{chapterprefix}{\Huge\sffamily\bfseries}
+\addtokomafont{caption}{\sffamily} % For figure and table captions
+\addtokomafont{captionlabel}{\sffamily} % For labels in captions
+
+%-------------------------------------------
+% HEADINGS
+%-------------------------------------------
+
+% Adding a rule below the chapter title
+\renewcommand*{\chapterheadendvskip}{%
+  \vspace{.5\baselineskip}%
+  \hrule height 2pt
+  \vspace{\baselineskip}%
+}
+
+
+%-------------------------------------------
+% HEADERS AND FOOTERS
+%-------------------------------------------
+
+% Package to control the headers and footers
+\usepackage{scrlayer-scrpage}
+\automark[chapter]{chapter}
+% Clear all existing header/footer settings
+\clearpairofpagestyles
+
+% Define the footer content
+
+% Places the page number in the outer footer (right side on odd pages, left side on even pages)
+\ofoot*{\pagemark}
+% Clears the inner footer, leaving it empty
+\ifoot*{}
+
+
+% Define the header content
+
+% Places the section/chapter heading in the outer header (right side on odd pages, left side on even pages)
+\ohead*{\headmark}
+
+
+ % Add a 0.4pt line below the header
+\KOMAoptions{headsepline=0.4pt}
+
+% Redefine the plain page style to prevent headers on chapter and part pages
+\renewcommand{\chapterpagestyle}{empty}
+\renewcommand{\partpagestyle}{empty}
+
+
+%-------------------------------------------
+% VERTICAL SPACING
+%-------------------------------------------
+
+% Set a minimal space between each item of itemized and enumerated lists
+%\setitemize{nosep}
+%\setenumerate{nosep}
+%\setdescription{nosep}
+
+%-------------------------------------------
+% TABLE OF CONTENTS
+%-------------------------------------------
+
+% Define the indentation in the table of contents
+
+\RedeclareSectionCommand[tocpagenumberbox=\mbox]{part}
+\RedeclareSectionCommand[tocpagenumberbox=\mbox,tocnumwidth=2em]{chapter}
+\RedeclareSectionCommand[tocpagenumberbox=\mbox,tocindent=1.5em,tocnumwidth=4.5em]{section}
+\RedeclareSectionCommand[tocpagenumberbox=\mbox,tocindent=1.5em,tocnumwidth=4.5em]{subsection}
+
+\setcounter{tocdepth}{1}  % Less detailed TOC
+
+% Uncomment to fix overfull boxes quickly (at the cost of quality)
+% \emergencystretch=3em
+
+
+%-------------------------------------------
+% LATEX TYPE 1/OPENTYPE FONTS SELECTION
+%-------------------------------------------
+% See https://www.overleaf.com/learn/latex/Font_typefaces and https://www.tug.org/FontCatalogue for more LaTeX font faces
+
+\ifluatex
+    \setmainfont{Crimson Pro}
+    \setsansfont[Scale=MatchLowercase]{Source Sans Pro}
+    \setmonofont[Scale=MatchLowercase]{Source Code Pro}
+    \setmathfont{XITS Math}
+    \gdef\fontlicensetext{This document uses Crimson Pro, Source Sans Pro, Source Code Pro, and XITS Math fonts, which are licensed under the SIL Open Font License, Version 1.1.}
+\else
+    \usepackage{libertinus}
+    \usepackage[scale=1.02]{sourcecodepro}
+    \gdef\fontlicensetext{This document uses Linux Libertine and Source Code Pro fonts, which are licensed under the SIL Open Font License, Version 1.1.}
+\fi
+
+
+\newcommand{\definition}[2]{%
+    \begin{tcolorbox}[colframe=black, leftrule=4pt, left=5pt, right=5pt, top=5pt, bottom=5pt, arc=1pt]
+    \textbf{\textsf{#1}} \,$\bullet$\, #2
+    \end{tcolorbox}%
+}
+
+\graphicspath{{images/}}

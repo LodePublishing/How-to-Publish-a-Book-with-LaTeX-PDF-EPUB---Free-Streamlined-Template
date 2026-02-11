@@ -1,0 +1,24 @@
+% Advanced e-book-specific style
+% See README.md for documentation
+
+
+% Alternate setup as we cannot use [table]{xcolor}
+% For colors
+\usepackage{xcolor}
+% For row/column colors (table option is incompatible)
+\usepackage{colortbl}
+    
+% Create a new table style
+\newcommand{\alternaterowcolors}{
+    \rowcolors{2}{lightgray}{white}  % Start from row 2, alternate between lightgray and white
+}
+
+% Automatically apply the style to all tabulars
+\let\oldtabular\tabular
+\let\endoldtabular\endtabular
+\renewenvironment{tabular}[1]{
+    \alternaterowcolors
+    \oldtabular{#1}
+}{
+    \endoldtabular
+}

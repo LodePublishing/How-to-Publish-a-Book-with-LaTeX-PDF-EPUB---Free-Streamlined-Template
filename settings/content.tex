@@ -1,0 +1,77 @@
+% Book content configuration
+% See README.md for documentation
+
+%-------------------------------------------
+% PAPER TYPE
+%-------------------------------------------
+
+% creampaper, whitepaper, colorpaper, or premiumcolorpaper
+\def\papertype{whitepaper} 
+
+%-------------------------------------------
+% BOOK TRIM SIZE
+%-------------------------------------------
+\newlength{\bookwidth}
+\newlength{\bookheight}
+\setlength{\bookwidth}{6in}\setlength{\bookheight}{9in}
+
+
+%-------------------------------------------
+% BOOK INTERIOR BLEED AND MARGINS
+%-------------------------------------------
+
+% Bleed is only needed if you have background pictures spanning over the margins. Check out the advanced version of the template.
+\newlength{\bleed}
+\setlength{\bleed}{0in}
+%\setlength{\bleed}{0.125in}
+
+
+% These values can be adjusted as needed for different book layouts; Amazon requires at least 0.25in
+\newlength{\margintop}
+\newlength{\marginbottom}
+\newlength{\marginoutside}    
+\newlength{\margininside}
+
+% Technical lower limit for print is 0.425in for 150 pages or less
+% higher recommended, especially for longer books
+\setlength{\margininside}{0.7in}
+
+% Update this to the actual page count to get the right margins
+\newcount\pagecount
+\pagecount=100
+
+% The inner margins depend on the number of pages of your book.  
+\ifnum\pagecount>700
+    \setlength{\margininside}{1.5in}% 701-828 pages, 0.925in minimum
+\else\ifnum\pagecount>500
+    \setlength{\margininside}{1.3in}% 501-700 pages, 0.8in minimum
+\else\ifnum\pagecount>300
+    \setlength{\margininside}{1.1in}% 301-500 pages, 0.675in minimum
+\else\ifnum\pagecount>150
+    \setlength{\margininside}{0.9in}% 151-300 pages, 0.55in minimum
+\fi\fi\fi\fi
+
+% Ditto, these are technical lower limits, not necessarily recommended settings
+\setlength{\margintop}{0.25in}
+\setlength{\marginbottom}{0.25in}
+% Minimum for Amazon is 0.3in, for others 0.5in, 1in recommended
+\setlength{\marginoutside}{1in}
+
+\setlength{\headsep}{15pt}
+
+
+%-------------------------------------------
+% COVER IMAGE
+%-------------------------------------------
+
+% Cover and image information
+\newif\ifuseCoverImage
+% Uncomment and upload cover images if you want to show the cover image on the title page.
+\useCoverImagetrue
+
+
+\ifuseCoverImage
+% Upload a high-resolution .PNG version of your front cover into the "images" folder
+% This image (as JPG) could be re-used for the e-book cover on a self-publishing platform
+    \newcommand{\coverImage}{example-image}
+\fi

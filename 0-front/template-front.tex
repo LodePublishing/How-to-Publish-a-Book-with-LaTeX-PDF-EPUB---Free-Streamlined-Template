@@ -1,0 +1,64 @@
+% Template front page (can be deleted)
+% This is an overview of the features of the template; you can safely remove this file
+\thispagestyle{empty}
+
+\makeatletter
+\renewcommand{\reference}[1]{%
+  \@ifundefined{r@#1}{%
+    % Reference is undefined - show citation instead
+    see \citetitle{lode2026}%
+  }{%
+    % Reference is defined - show normal reference
+    \ref{#1}%
+  }%
+}
+\makeatother
+
+\begin{center}
+{\bfseries \sffamily \Huge LODE Template 2026 Free}
+
+Transform your manuscript into a professionally typeset book
+\end{center}
+\begin{quotation}What is magic for? What use is wizardry if it cannot save a unicorn?\par
+
+\hfill\textemdash{}Peter S. Beagle, \textit{The Last Unicorn}\end{quotation}
+
+\begin{tip}
+\begin{itemize}
+    \item Customizable LaTeX template;
+
+    \item Industry-leading LaTeX-based typesetting;
+
+    \item Turnkey-ready PDF and EPUB output for self-publishing; and
+
+    \item Compiles online (Overleaf) or locally (MikTeX or TeX Live).
+\end{itemize}
+\end{tip}
+
+\begin{enumerate}
+
+    \item Configure the files in the \path{/settings} directory;
+
+    \item Edit the front matter files in the \path{/0-front} directory;
+
+    \item Copy your manuscript into the \path{/1-body} directory;
+
+    \item Make structural changes in the \path{/structure} directory;
+
+    \item Customize the style files in the \path{/style} directory;
+
+    \item Delete the \path{0-front/template-front.tex} file;
+
+    \item Compile the book with any LaTeX distribution; and
+
+    \item Publish the \path{main.pdf} and \path{e-book.epub} from \textbf{Logs and output files} / \textbf{Other logs and files} (Overleaf) or from your local directory.
+\end{enumerate}
+
+\textit{For the free version of Overleaf, consider \textbf{Fast [draft]} and \textbf{Don't check syntax}.}
+
+\begin{center}
+    \Large Upgrade to the full template with covers, index, glossary, build automation, and more at \url{https://www.lodepublishing.com/template}.\par
+\end{center}
+
+% Add copyright information
+{\small \ifluatex\copyright\else(C)\fi 2026 Clemens Lode. All rights reserved. This template is for individual author use only and may not be redistributed or used for mass production. See the \path{LICENSE.md} for details about the license.}

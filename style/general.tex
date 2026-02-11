@@ -1,0 +1,51 @@
+% General settings applying both to e-books and print
+
+%-------------------------------------------
+% HYPHENATIONS
+%-------------------------------------------
+
+% Add any words you want to hy-phe-na-ted in a particular way
+\hyphenation{super-cali-fragi-listic mega-zorb-u-lator anti-flab-ber-gast every-where}
+
+%-------------------------------------------
+% HEADINGS
+%-------------------------------------------
+
+% If you want to suppress chapter numbers from chapter and section titles for easier reading, uncomment the following lines
+%\renewcommand*\chapterformat{}
+%\renewcommand{\thesection}{\arabic{section}}
+
+% Remove the dot from the section/subsection number
+%\renewcommand{\thesubsection}{\arabic{section}\arabic{subsection}}
+
+% Reset and show the chapter number for each table/figure/equation
+\counterwithin{equation}{chapter}
+\counterwithin{figure}{chapter}
+\counterwithin{table}{chapter}
+
+
+\makeatletter
+\newtcolorbox{tip}{colframe=black!20, colback=black!0, coltitle=black!20!black,arc=2pt, title=\textbf{\textsf{Tip}}, grow to left by=\@totalleftmargin}
+\makeatother
+
+\usepackage{xstring}
+
+
+
+% Style the quotation environment to use italic text
+\let\oldquotation\quotation
+\let\endoldquotation\endquotation
+\renewenvironment{quotation}{\oldquotation\itshape}{\endoldquotation}
+
+
+% Simplified reference command
+\newcommand{\reference}[1]{see \nameref{#1}, Chapter~\ref{#1}}
+
+\title{\myTitle}
+\author{\myAuthor}
+
+% Save the original \href command
+\let\oldhref\href
+
+% Redefine \href to automatically underline the text
+\renewcommand{\href}[2]{\oldhref{#1}{\uline{#2}}}

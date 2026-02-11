@@ -1,0 +1,18 @@
+% Bibliography support
+% See README.md for documentation
+
+% See https://www.ctan.org/pkg/biblatex for documentation.
+
+% biber is the default
+%\PassOptionsToPackage{backend=bibtex}{biblatex}
+
+\usepackage[style=\citestyle,doi=true,url=false,eprint=false]{biblatex}
+
+% Allow DOI line breaking to prevent margin overflow
+\setcounter{biburlnumpenalty}{100}
+\setcounter{biburlucpenalty}{100}
+\setcounter{biburllcpenalty}{100}
+\def\UrlBreaks{\do\/\do-\do.\do\_}
+\AtBeginBibliography{\emergencystretch=2em}
+
+\addbibresource{bibliography.bib}

@@ -1,0 +1,74 @@
+-- make4ht build file for e-book post-processing
+local filter = require "make4ht-filter"
+local domfilter = require "make4ht-domfilter"
+
+local process = filter {
+  function(s)
+    -- Fix empty <title> tags
+    s = s:gsub("<title></title>", "<title>Notes</title>")
+
+    -- Convert verbatim/minted code blocks from inline spans to <pre> blocks.
+    --
+    -- tex4ht renders \verbatim as word-per-span inside <p class="indent">.
+    -- Each word gets its own <span class="ectt-1000"> tag.
+    -- Line breaks in code are represented by a newline between </span> and <span>.
+    -- Same-line words have </span><span (no newline between).
+    s = s:gsub('<p class="indent">(%s*<span%s+class="ectt.-)%s*</p>',
+      function(content)
+        -- Verify this paragraph contains ONLY ectt spans (no other HTML)
+        local stripped = content:gsub('<span%s+class="ectt%-[^"]*">', '')
+        stripped = stripped:gsub('</span>', '')
+        stripped = stripped:gsub('%s', '')
+        if stripped:find('<') then
+          return nil -- Contains other HTML elements, not a pure code block
+        end
+
+        -- Convert span sequences to plain text, preserving line breaks.
+        local code = content
+        code = code:gsub('</span>\n *<span%s+class="ectt%-[^"]*">', '\n')
+        code = code:gsub('</span><span%s+class="ectt%-[^"]*">', '')
+        code = code:gsub('<span%s+class="ectt%-[^"]*">', '')
+        code = code:gsub('</span>', '')
+        code = code:gsub("\194\160", " ")
+        code = code:match("^%s*(.-)%s*$")
+
+        if #code > 0 then
+          return '<pre class="verbatim">' .. code .. '</pre>'
+        end
+        return nil
+      end
+    )
+
+    -- Remove rules="..." attribute from <table> (not allowed in EPUB3 XHTML)
+    s = s:gsub('%s+rules="[^"]*"', '')
+    s = s:gsub("%s+rules='[^']*'", '')
+
+    -- Fix enumerate-enumitem: replace CSS Grid (unsupported by most e-readers)
+    -- with float-based layout for dl/dt/dd enumerate lists
+    s = s:gsub("dl%.enumerate%-enumitem{[^}]*}", "dl.enumerate-enumitem{margin-left: 0; padding-left: 1em;}")
+    s = s:gsub("dt%.enumerate%-enumitem{[^}]*}", "dt.enumerate-enumitem{float: left; clear: left; margin-right: 0.5em; font-weight: normal;}")
+    s = s:gsub("dd%.enumerate%-enumitem{[^}]*}", "dd.enumerate-enumitem{margin-left: 2em;}")
+    return s
+  end
+}
+
+-- DOM filter: fix empty rowlines attribute in MathML <mtable> elements.
+-- make4ht's built-in mathmlfixes DOM filter runs AFTER custom DOM filters
+-- and sets rowlines="" (empty) on mtables without hlines, which fails
+-- epubcheck validation. By setting rowlines="none" first, the built-in
+-- filter skips these elements (it returns early if rowlines is already set).
+local fix_mathml = domfilter {
+  function(dom)
+    for _, mtable in ipairs(dom:query_selector("mtable")) do
+      if not mtable:get_attribute("rowlines") then
+        mtable:set_attribute("rowlines", "none")
+      end
+    end
+    return dom
+  end
+}
+
+Make:match("html$", process)
+Make:match("xhtml$", process)
+Make:match("css$", process)
+Make:match("xhtml$", fix_mathml)

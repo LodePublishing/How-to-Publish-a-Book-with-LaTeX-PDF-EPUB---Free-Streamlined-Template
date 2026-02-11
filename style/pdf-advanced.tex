@@ -1,0 +1,74 @@
+% Advanced PDF-specific style
+
+%-------------------------------------------
+% LISTS
+%-------------------------------------------
+
+%\setlist[itemize,1]{label=\ding{110}}
+%\setlist[itemize,1]{leftmargin=0pt, itemindent=1em, labelsep=0.5em,label=\ding{110}}
+
+% Use level 2 to denote a list within a list
+%\setlist[itemize,2]{label=\ding{109}}
+%\setlist[itemize,3]{label={}} %list within a list within a list
+%\setlist[itemize,4]{label={}} %list within a list within a list within a list
+
+
+
+%-------------------------------------------
+% STANDALONE PDF
+%-------------------------------------------
+
+\hypersetup{
+    pdfnewwindow=true,
+    pdfdisplaydoctitle=true,
+    bookmarksopen=true,
+    bookmarksnumbered=true,
+    bookmarksopenlevel=1,
+    hidelinks,
+    pdftitle={\myTitle},
+    pdfauthor={\myAuthor},
+    pdfsubject={\mySubtitle},
+    pdfkeywords={\myKeywords},
+    pdflang={\booklanguage}
+}
+
+
+%-------------------------------------------
+% TABLES
+%-------------------------------------------
+% For row/column colors
+\usepackage[table]{xcolor}
+
+\rowcolors{2}{lightgray}{white}
+
+
+
+%-------------------------------------------
+% ENVIRONMENTS
+%-------------------------------------------
+
+\AtBeginEnvironment{tabular}{\sffamily\small}
+\AtBeginEnvironment{tabular*}{\sffamily\small}
+
+
+% Add space only around specific environments
+\BeforeBeginEnvironment{tabular}{\vspace{12pt}}
+\AfterEndEnvironment{tabular}{\vspace{12pt}}
+
+\BeforeBeginEnvironment{equation}{\vspace{12pt}}
+\AfterEndEnvironment{equation}{\vspace{12pt}}
+
+\BeforeBeginEnvironment{align}{\vspace{12pt}}
+\AfterEndEnvironment{align}{\vspace{12pt}}
+
+\BeforeBeginEnvironment{itemize}{\vspace{12pt}}
+\AfterEndEnvironment{itemize}{\vspace{12pt}}
+
+\BeforeBeginEnvironment{enumerate}{\vspace{12pt}}
+\AfterEndEnvironment{enumerate}{\vspace{12pt}}
+
+\BeforeBeginEnvironment{description}{\vspace{12pt}}
+\AfterEndEnvironment{description}{\vspace{12pt}}
+
+\BeforeBeginEnvironment{quotation}{\vspace{12pt}}
+\AfterEndEnvironment{quotation}{\vspace{12pt}}

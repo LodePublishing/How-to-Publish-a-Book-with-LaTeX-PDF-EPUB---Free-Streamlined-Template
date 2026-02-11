@@ -1,0 +1,26 @@
+% Core library and package loading sequence
+
+
+% Detect draft mode
+\input{lib/draft.tex}
+
+\ifebook
+% Typography is handled on the e-book reader's side and there is no draft mode for e-books
+\else
+
+% Load general font support and additional typography packages
+    \input{lib/typography}
+
+\fi
+
+% Configures references and loads packages for typesetting
+\input{lib/typesetting}
+
+% Sets up support for other languages and hyphenation
+\input{lib/language}
+
+% Loads the bibliography support and the bibliography files
+\input{lib/bibliography}
+
+% Cross-referencing and hyperlink configuration
+\input{lib/references}
