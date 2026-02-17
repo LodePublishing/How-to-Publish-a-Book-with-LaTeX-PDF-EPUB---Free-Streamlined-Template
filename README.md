@@ -87,6 +87,10 @@ The [full LODE Template](https://www.lodepublishing.com/template) adds:
 
 Get the full template at **https://www.lodepublishing.com/template**.
 
+## Learn More
+
+This template is covered in depth in [How to Publish Your Book with LaTeX](https://lodepublishing.com/book/latex-book-publishing-in-2026/), a complete guide to professional book publishing with LaTeX in 2026.
+
 ## Requirements
 
 - TeX Live 2024+ (or equivalent)
